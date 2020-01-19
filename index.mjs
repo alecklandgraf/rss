@@ -30,7 +30,9 @@ async function parseFeed(feedUrl) {
     const [, token] = line.match(/<([\w:]+)/) || [];
     if (token) {
       if (token === "title") {
-        console.log(pad(`${token}: ${line}`, indendation));
+        console.log(
+          pad(`${token} 👉 ${line.match(/<.*>(.*)<\/.*>/)[1]}`, indendation)
+        );
       } else {
         console.log(pad(token, indendation));
       }
