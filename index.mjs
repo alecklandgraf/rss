@@ -26,7 +26,7 @@ async function parseFeed(feedUrl) {
   let indendation = 0;
   const DEFAULT_SPACES = 2;
 
-  lines.splice(0, 150).forEach(line => {
+  lines.forEach(line => {
     const [, token] = line.match(/<([\w:]+)/) || [];
     if (token) {
       if (token === "title") {
