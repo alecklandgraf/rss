@@ -45,6 +45,7 @@ async function parseFeed(feedUrl) {
   const DEFAULT_SPACES = 2;
 
   lines.forEach(line => {
+    // todo: add /g to the regex: line.match(/<([\w:]+)/g) to capture things like <item> <title>NASA Pays Tribute, Says Goodbye to One of Agency’s Great Observatories</title>
     const [, token] = line.match(/<([\w:]+)/) || [];
     if (token) {
       if (token === "title") {
