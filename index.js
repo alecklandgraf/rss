@@ -1,4 +1,27 @@
-import fetch from "node-fetch";
+const https = require("https");
+
+function get(url) {
+  const { hostname, pathname, search } = new URL(url);
+  const options = {
+    hostname,
+    port: 443,
+    path: `${pathname}${search}`
+  };
+
+  return new Promise((resolve, reject) => {
+    const req = https.get(options, res => {
+      let body = "";
+      res.on("data", data => {
+        body += data;
+      });
+      res.on("error", reject);
+      res.on("end", () => resolve(body));
+    });
+
+    req.on("error", reject);
+    req.end();
+  });
+}
 
 const FEED =
   "https://www.youtube.com/feeds/videos.xml?channel_id=UCLsiaNUb42gRAP7ewbJ0ecQ";
@@ -13,9 +36,7 @@ async function parseFeed(feedUrl) {
   }
   console.log(`Fetching feed for url: ${feedUrl}\n\n`);
 
-  const data = await fetch(feedUrl);
-  // future optimization to use the body ReadableStream and use less mem
-  const text = await data.text();
+  const text = await get(feedUrl);
   const lines = text.split("\n");
 
   const feed = {};
@@ -50,3 +71,5 @@ async function parseFeed(feedUrl) {
 }
 
 parseFeed(FEED).then();
+
+module.exports = parseFeed;
