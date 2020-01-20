@@ -2,7 +2,7 @@
 Just for fun, dependency free, MIT
 
 ```console
-yarn feed https://www.nasa.gov/rss/dyn/breaking_news.rss
+$ yarn feed https://www.nasa.gov/rss/dyn/breaking_news.rss
 
 Fetching feed for url: https://www.nasa.gov/rss/dyn/breaking_news.rss
 
