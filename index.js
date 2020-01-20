@@ -23,9 +23,6 @@ function get(url) {
   });
 }
 
-const FEED =
-  "https://www.youtube.com/feeds/videos.xml?channel_id=UCLsiaNUb42gRAP7ewbJ0ecQ";
-
 function pad(str, indentation) {
   return str.padStart(str.length + indentation);
 }
@@ -70,6 +67,9 @@ async function parseFeed(feedUrl) {
   });
 }
 
-parseFeed(FEED).then();
+const DEMO_FEED_URL =
+  "https://www.youtube.com/feeds/videos.xml?channel_id=UCLsiaNUb42gRAP7ewbJ0ecQ";
+
+parseFeed(process.argv[2] || DEMO_FEED_URL).then();
 
 module.exports = parseFeed;
